@@ -9,6 +9,12 @@ class QiitaApiClient {
         'page': page,
         'per_page': 20,
       },
+      options: Options(
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": " Bearer 9b71d2f82f8fa8577cdb22c6f2d556b0e590168b",
+        },
+      ),
     );
 
     var articles = response.data
