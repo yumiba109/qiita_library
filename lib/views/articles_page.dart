@@ -33,7 +33,53 @@ class _Articles extends HookWidget {
           viewModel.getArticles();
           return const LinearProgressIndicator();
         }
-        return Text(state.articles[index].title);
+        return _articleItem(state.articles[index]);
+      },
+    );
+  }
+
+  Widget _articleItem(article) {
+    return Container(
+      padding: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        border: const Border(
+          bottom: const BorderSide(
+            color: const Color(0x1e333333),
+            width: 1,
+          ),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(article.title),
+          SizedBox(
+            height: 10.0,
+          ),
+          Row(
+            children: <Widget>[
+              for (int i = 0; i < article.tags.length; i++)
+                _articleTag(article.tags[i])
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _articleTag(tag) {
+    return GestureDetector(
+      child: Container(
+        margin: EdgeInsets.only(right: 7.5),
+        child: Text(
+          tag['name'],
+          style: TextStyle(
+            decoration: TextDecoration.underline,
+          ),
+        ),
+      ),
+      onTap: () {
+        print(tag['name']);
       },
     );
   }

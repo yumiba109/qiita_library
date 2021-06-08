@@ -8,6 +8,7 @@ abstract class QiitaArticle with _$QiitaArticle {
   factory QiitaArticle({
     String? title,
     String? url,
+    List? tags,
   }) = _QiitaArticle;
 
   factory QiitaArticle.fromJson(Map<String, dynamic> json) =>
