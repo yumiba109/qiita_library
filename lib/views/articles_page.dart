@@ -18,11 +18,21 @@ class ArticlesPage extends HookWidget {
 class _Articles extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final viewModel = useProvider(articleViewModel);
     final state = useProvider(articleViewModel.state);
+
+    if (state.articles.length == 0) {
+      if (!state.hasNext) return Text('検索結果なし');
+      return const LinearProgressIndicator();
+    }
 
     return ListView.builder(
       itemCount: state.articles.length,
       itemBuilder: (context, int index) {
+        if (index == (state.articles.length - 1) && state.hasNext) {
+          viewModel.getArticles();
+          return const LinearProgressIndicator();
+        }
         return Text(state.articles[index].title);
       },
     );

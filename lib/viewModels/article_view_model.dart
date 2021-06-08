@@ -15,11 +15,30 @@ class ArticleViewModel extends StateNotifier<ArticlesState> {
 
   final ArticleRepository repository;
 
+  int _page = 1;
+  bool _isLoading = false;
+
   Future<void> getArticles() async {
-    final articles = await repository.fetchArticles();
+    if (_isLoading || !state.hasNext) {
+      return;
+    }
+
+    _isLoading = true;
+
+    final articles = await repository.fetchArticles(_page);
+    final newArticles = [...state.articles, ...articles];
+
+    if (articles.length % 20 != 0 || articles.length == 0) {
+      state = state.copyWith(
+        hasNext: false,
+      );
+    }
 
     state = state.copyWith(
-      articles: articles,
+      articles: newArticles,
     );
+
+    _page++;
+    _isLoading = false;
   }
 }
