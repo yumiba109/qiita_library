@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:qiita_library/views/articles_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,14 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: ArticlesPage(),
     );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
   }
 }
