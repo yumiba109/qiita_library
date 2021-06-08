@@ -52,6 +52,10 @@ class _Articles extends HookWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          _articleUser(article.user),
+          SizedBox(
+            height: 10.0,
+          ),
           Text(article.title),
           SizedBox(
             height: 10.0,
@@ -64,6 +68,20 @@ class _Articles extends HookWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _articleUser(user) {
+    return Row(
+      children: [
+        CircleAvatar(
+          backgroundImage: NetworkImage(user.profileImageUrl),
+          radius: 12.0,
+          child: Text(''),
+        ),
+        SizedBox(width: 8.0),
+        Text(user.name)
+      ],
     );
   }
 
