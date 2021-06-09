@@ -28,6 +28,8 @@ dependencies:
 
   intl: ^0.17.0
 
+  webview_flutter: ^2.0.8
+
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
