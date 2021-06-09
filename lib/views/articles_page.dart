@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qiita_library/viewModels/article_view_model.dart';
 import 'package:intl/intl.dart';
+import 'package:qiita_library/views/article_datail_page.dart';
 
 class ArticlesPage extends HookWidget {
   @override
@@ -34,46 +35,57 @@ class _Articles extends HookWidget {
           viewModel.getArticles();
           return const LinearProgressIndicator();
         }
-        return _articleItem(state.articles[index]);
+        return _articleItem(context, state.articles[index]);
       },
     );
   }
 
-  Widget _articleItem(article) {
-    return Container(
-      padding: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        border: const Border(
-          bottom: const BorderSide(
-            color: const Color(0x1e333333),
-            width: 1,
+  Widget _articleItem(context, article) {
+    return GestureDetector(
+      child: Container(
+        padding: EdgeInsets.all(15.0),
+        decoration: BoxDecoration(
+          border: const Border(
+            bottom: const BorderSide(
+              color: const Color(0x1e333333),
+              width: 1,
+            ),
           ),
         ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _articleUser(article.user),
+            SizedBox(
+              height: 10.0,
+            ),
+            Text(article.title),
+            SizedBox(
+              height: 10.0,
+            ),
+            Wrap(
+              spacing: 7.5,
+              children: <Widget>[
+                for (int i = 0; i < article.tags.length; i++)
+                  _articleTag(article.tags[i])
+              ],
+            ),
+            SizedBox(
+              height: 5.0,
+            ),
+            _articleCreatedAt(article.createdAt),
+          ],
+        ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _articleUser(article.user),
-          SizedBox(
-            height: 10.0,
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ArticleDetailPage(
+              article: article,
+            ),
           ),
-          Text(article.title),
-          SizedBox(
-            height: 10.0,
-          ),
-          Wrap(
-            spacing: 7.5,
-            children: <Widget>[
-              for (int i = 0; i < article.tags.length; i++)
-                _articleTag(article.tags[i])
-            ],
-          ),
-          SizedBox(
-            height: 5.0,
-          ),
-          _articleCreatedAt(article.createdAt),
-        ],
-      ),
+        );
+      },
     );
   }
 
