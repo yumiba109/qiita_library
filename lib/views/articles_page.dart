@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qiita_library/viewModels/article_view_model.dart';
+import 'package:intl/intl.dart';
 
 class ArticlesPage extends HookWidget {
   @override
@@ -60,12 +61,17 @@ class _Articles extends HookWidget {
           SizedBox(
             height: 10.0,
           ),
-          Row(
+          Wrap(
+            spacing: 7.5,
             children: <Widget>[
               for (int i = 0; i < article.tags.length; i++)
                 _articleTag(article.tags[i])
             ],
           ),
+          SizedBox(
+            height: 5.0,
+          ),
+          _articleCreatedAt(article.createdAt),
         ],
       ),
     );
@@ -88,7 +94,6 @@ class _Articles extends HookWidget {
   Widget _articleTag(tag) {
     return GestureDetector(
       child: Container(
-        margin: EdgeInsets.only(right: 7.5),
         child: Text(
           tag['name'],
           style: TextStyle(
@@ -99,6 +104,19 @@ class _Articles extends HookWidget {
       onTap: () {
         print(tag['name']);
       },
+    );
+  }
+
+  Widget _articleCreatedAt(createdAt) {
+    DateFormat format = DateFormat('yyyy-MM-dd');
+    String date = format.format(DateTime.parse(createdAt).toLocal());
+
+    return Container(
+      width: double.infinity,
+      child: Text(
+        '$dateに投稿',
+        textAlign: TextAlign.right,
+      ),
     );
   }
 }

@@ -11,6 +11,7 @@ abstract class QiitaArticle with _$QiitaArticle {
     String? url,
     QiitaUser? user,
     List? tags,
+    @JsonKey(name: 'created_at') String? createdAt,
   }) = _QiitaArticle;
 
   factory QiitaArticle.fromJson(Map<String, dynamic> json) =>
