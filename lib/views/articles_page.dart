@@ -78,6 +78,7 @@ class _Articles extends HookWidget {
   }
 
   Widget _articleUser(user) {
+    final userId = user.id;
     return Row(
       children: [
         CircleAvatar(
@@ -86,7 +87,7 @@ class _Articles extends HookWidget {
           child: Text(''),
         ),
         SizedBox(width: 8.0),
-        Text(user.name)
+        Text('@$userId'),
       ],
     );
   }

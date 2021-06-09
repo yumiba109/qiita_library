@@ -6,7 +6,7 @@ part 'qiita_user.g.dart';
 @freezed
 abstract class QiitaUser with _$QiitaUser {
   factory QiitaUser({
-    String? name,
+    String? id,
     @JsonKey(name: 'profile_image_url') String? profileImageUrl,
   }) = _QiitaUser;
 
