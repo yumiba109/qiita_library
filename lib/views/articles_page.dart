@@ -41,14 +41,19 @@ class _Articles extends HookWidget {
       return const LinearProgressIndicator();
     }
 
-    return ListView.builder(
-      itemCount: state.articles.length,
-      itemBuilder: (context, int index) {
-        if (index == (state.articles.length - 1) && state.hasNext) {
-          viewModel.getArticles();
-          return const LinearProgressIndicator();
-        }
-        return _articleItem(context, state.articles[index]);
+    return RefreshIndicator(
+      child: ListView.builder(
+        itemCount: state.articles.length,
+        itemBuilder: (context, int index) {
+          if (index == (state.articles.length - 1) && state.hasNext) {
+            viewModel.getArticles();
+            return const LinearProgressIndicator();
+          }
+          return _articleItem(context, state.articles[index]);
+        },
+      ),
+      onRefresh: () async {
+        viewModel.refreshArticles();
       },
     );
   }

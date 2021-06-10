@@ -51,4 +51,15 @@ class ArticleViewModel extends StateNotifier<ArticlesState> {
 
     _page = 1;
   }
+
+  Future<void> refreshArticles() async {
+    state = state.copyWith(
+      articles: [],
+      hasNext: true,
+    );
+
+    _page = 1;
+
+    this.getArticles();
+  }
 }
