@@ -48,5 +48,7 @@ class ArticleViewModel extends StateNotifier<ArticlesState> {
       keyword: keyword,
       hasNext: true,
     );
+
+    _page = 1;
   }
 }
