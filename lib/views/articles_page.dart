@@ -4,13 +4,26 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qiita_library/viewModels/article_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:qiita_library/views/article_datail_page.dart';
+import 'package:qiita_library/views/article_search_setting_page.dart';
 
 class ArticlesPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('記事一覧'),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ArticleSearchSettingPage(),
+                  fullscreenDialog: true,
+                ),
+              );
+            },
+            icon: Icon(Icons.search),
+          ),
+        ],
       ),
       body: _Articles(),
     );

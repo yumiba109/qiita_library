@@ -25,7 +25,7 @@ class ArticleViewModel extends StateNotifier<ArticlesState> {
 
     _isLoading = true;
 
-    final articles = await repository.fetchArticles(_page);
+    final articles = await repository.fetchArticles(_page, state.keyword);
     final newArticles = [...state.articles, ...articles];
 
     if (articles.length % 20 != 0 || articles.length == 0) {
@@ -40,5 +40,13 @@ class ArticleViewModel extends StateNotifier<ArticlesState> {
 
     _page++;
     _isLoading = false;
+  }
+
+  Future<void> setQuery(String keyword) async {
+    state = state.copyWith(
+      articles: [],
+      keyword: keyword,
+      hasNext: true,
+    );
   }
 }

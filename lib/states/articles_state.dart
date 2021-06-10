@@ -8,6 +8,7 @@ abstract class ArticlesState with _$ArticlesState {
   const factory ArticlesState({
     @Default([]) dynamic articles,
     @Default(true) bool hasNext,
+    @Default('') String keyword,
   }) = _ArticlesState;
 
   factory ArticlesState.fromJson(Map<String, dynamic> json) =>
