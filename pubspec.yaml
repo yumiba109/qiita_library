@@ -17,8 +17,6 @@ dependencies:
 
   state_notifier: ^0.7.0
 
-  get: ^4.1.4
-
   dio: ^4.0.0-beta4
 
   json_serializable: ^4.0.2
